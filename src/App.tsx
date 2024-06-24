@@ -1,12 +1,12 @@
-import HeroBody from "./components/Hero/herobody";
-import HeroSummary from "./components/Hero/heroSummary";
+import { Outlet } from "react-router-dom";
+import NavBar from "./components/Nav/NavBar";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <HeroBody />
-      <HeroSummary />
+      <NavBar />
+      <Outlet />
     </>
   );
 }
