@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-function HeroSummary() {
+export default function HeroSummary() {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -27,5 +27,3 @@ function HeroSummary() {
     </motion.div>
   );
 }
-
-export default HeroSummary;

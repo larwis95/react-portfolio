@@ -19,7 +19,7 @@ export default function HeroBody(): JSX.Element {
     >
       <motion.h1
         style={{ y: textY }}
-        className="font-bold text-white text-7xl md:text-9xl relative z-10"
+        className="font-bold text-white lg:text-9xl md:text-5xl sm:text-base xs:text-base relative z-10 text-center"
       >
         Lawrence Wisniewski
       </motion.h1>
@@ -31,14 +31,18 @@ export default function HeroBody(): JSX.Element {
           backgroundPosition: "bottom",
           y: heroBGY,
         }}
+        animate={{ scale: [2.0, 1.5, 1.0], y: ["50%", "25%", "0%"] }}
+        transition={{ duration: 2.5 }}
       />
-      <div
+      <motion.div
         className="absolute inset-0 z-20"
         style={{
           backgroundImage: `url(${heroFG})`,
           backgroundSize: "cover",
           backgroundPosition: "bottom",
         }}
+        animate={{ opacity: [0.0, 0.0, 0.0, 1.0] }}
+        transition={{ duration: 4.0 }}
       />
     </div>
   );
