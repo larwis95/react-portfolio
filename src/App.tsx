@@ -1,12 +1,12 @@
-import { Outlet } from "react-router-dom";
-import NavBar from "./components/Nav/NavBar";
+import AnimatedOutlet from "./utils/page-transitions/AnimatedOutlet";
+import Nav from "./components/Nav";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <NavBar />
-      <Outlet />
+      <Nav />
+      <AnimatedOutlet />
     </>
   );
 }

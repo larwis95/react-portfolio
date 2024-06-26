@@ -18,7 +18,9 @@ export default function HeroBody(): JSX.Element {
       className="w-full h-screen overflow-hidden relative grid place-items-center"
     >
       <motion.h1
-        style={{ y: textY }}
+        style={{
+          y: textY,
+        }}
         className="font-bold text-white lg:text-9xl md:text-5xl sm:text-base xs:text-base relative z-10 text-center"
       >
         Lawrence Wisniewski
@@ -31,8 +33,13 @@ export default function HeroBody(): JSX.Element {
           backgroundPosition: "bottom",
           y: heroBGY,
         }}
-        animate={{ scale: [2.0, 1.5, 1.0], y: ["50%", "25%", "0%"] }}
-        transition={{ duration: 2.5 }}
+        animate={{
+          scale: [2.0, 1.5, 1.0],
+          y: ["50%", "25%", "0%"],
+        }}
+        transition={{
+          duration: 2.5,
+        }}
       />
       <motion.div
         className="absolute inset-0 z-20"
@@ -41,8 +48,16 @@ export default function HeroBody(): JSX.Element {
           backgroundSize: "cover",
           backgroundPosition: "bottom",
         }}
-        animate={{ opacity: [0.0, 0.0, 0.0, 1.0] }}
-        transition={{ duration: 4.0 }}
+        initial={{
+          display: "none",
+        }}
+        animate={{
+          display: "block",
+          scale: [2.0, 1.5, 1.0],
+        }}
+        transition={{
+          duration: 2.5,
+        }}
       />
     </div>
   );
