@@ -1,11 +1,5 @@
-import HeroBody from "../components/Hero/herobody";
-import HeroSummary from "../components/Hero/heroSummary";
+import Hero from "../components/Hero";
 
 export default function HomePage(): JSX.Element {
-  return (
-    <>
-      <HeroBody />
-      <HeroSummary />
-    </>
-  );
+  return <Hero />;
 }

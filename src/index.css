@@ -10,11 +10,16 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background: linear-gradient(#5f1203, #000000);
+  background-repeat: no-repeat;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke: 0.5px black;
+  -moz-osx-text-stroke: 0.5px black;
+
+  box-sizing: border-box;
 }
 
 a {
@@ -28,6 +33,7 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
@@ -39,44 +45,69 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 header {
-  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 2em;
   flex-direction: col;
+  z-index: 1000;
 }
 
-.sticky {
+@layer utilities {
+  .w-20vw {
+    width: 20vw;
+  }
+
+  .h-50vh {
+    height: 50vh;
+  }
+}
+
+.nav-placeholder {
+  height: 0px;
+  position: absolute;
+}
+
+.sticky-animation {
   animation-duration: 0.7s;
   animation-name: fadeInDown;
   animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.absolute-animation {
+  animation-duration: 0.7s;
+  animation-name: fadeInUp;
+  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.card:hover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 100%;
+  bottom: 100%;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation-duration: 1s;
+  animation-name: cardUp;
 }
 
 @keyframes fadeInDown {
   0% {
     opacity: 0;
     transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
