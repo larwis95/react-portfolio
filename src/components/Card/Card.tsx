@@ -1,17 +1,18 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { IconBrandGithub } from "@tabler/icons-react";
 
 interface CardProps {
   onClick?: () => void;
   key: number;
   position: number;
-  cardTitle: string;
   cardDescription: string;
   cardImage: string;
+  githubLink: string;
 }
 
 export default function Card({
-  cardTitle,
+  githubLink,
   cardDescription,
   cardImage,
   onClick,
@@ -20,7 +21,7 @@ export default function Card({
 
   return (
     <motion.div
-      className="card w-64 h-64 bg-black shadow-lg rounded-lg overflow-hidden relative cursor-pointer select-none flex flex-col justify-center items-center gap-2 p-4"
+      className="card  w-3/4 h-64 bg-rose-400 shadow-lg rounded-lg overflow-hidden relative cursor-pointer select-none flex flex-col justify-center items-center gap-4 p-4"
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -28,16 +29,20 @@ export default function Card({
         perspective: "1000px",
         rotateY: "-30deg",
         pointerEvents: "none",
+        opacity: 0,
       }}
-      animate={{
+      whileInView={{
+        opacity: 1.0,
         perspective: "0px",
         rotateY: "0deg",
         pointerEvents: "auto",
       }}
-      transition={{ duration: 2.0, delay: 1.5, type: "tween" }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ duration: 1.5, type: "tween" }}
     >
       <motion.div
-        className="overlay flex absolute top-full bottom-full left-0 right-0 rounded-lg bg-red-950 bg-opacity-40 w-full h-full z-20"
+        className="overlay flex absolute top-full bottom-full left-0 right-0 rounded-lg bg-red-950 bg-opacity-90 w-full h-full z-20"
         animate={{
           top: isHovered ? "0%" : "100%",
           bottom: isHovered ? "0%" : "100%",
@@ -45,21 +50,23 @@ export default function Card({
         }}
         transition={{ duration: 0.5 }}
       >
-        <p className="p-4 text-white stroke-black bold text-lg absolute bottom-4 left-6">
+        <p className="p-4 text-white stroke-black bold text-2xl absolute bottom-0 left-6">
           {cardDescription}
         </p>
+        <IconBrandGithub
+          size={64}
+          className="absolute bottom-0 right-6 cursor-pointer hover:stroke-rose-300 transition-colors"
+          onClick={() => window.open(githubLink, "_blank")}
+        />
       </motion.div>
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 z-1"
         style={{
           backgroundImage: `url(${cardImage})`,
           backgroundSize: "cover",
-          backgroundPosition: "bottom",
+          backgroundPosition: "top",
         }}
       ></div>
-      <h2 className="bold z-10 p-4 bg-red-900 border-solid border-amber-400 bg-opacity-60 text-2xl w-full text-center">
-        {cardTitle}
-      </h2>
     </motion.div>
   );
 }
