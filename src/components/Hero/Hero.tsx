@@ -2,15 +2,22 @@ import heroBG from "../../assets/hero_bg_portfolio.png";
 import heroFG from "../../assets/foreground_hero.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { easeIn } from "framer-motion";
 
-export default function HeroBody(): JSX.Element {
+export default function Hero(): JSX.Element {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  const heroBGY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
+  const heroBGY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"], {
+    clamp: true,
+    ease: easeIn,
+  });
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"], {
+    clamp: true,
+    ease: easeIn,
+  });
 
   return (
     <div

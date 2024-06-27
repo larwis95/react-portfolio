@@ -2,7 +2,7 @@ import { useOutlet, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import React from "react";
 
-const AnimatedOutlet = (): JSX.Element => {
+export default function AnimatedOutlet(): JSX.Element {
   const location = useLocation();
   const element = useOutlet();
   return (
@@ -10,6 +10,4 @@ const AnimatedOutlet = (): JSX.Element => {
       {element && React.cloneElement(element, { key: location.pathname })}
     </AnimatePresence>
   );
-};
-
-export default AnimatedOutlet;
+}

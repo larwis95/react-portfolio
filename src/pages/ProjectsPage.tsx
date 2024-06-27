@@ -67,7 +67,7 @@ function clickHandler(url: string): void {
   window.open(url, "_blank");
 }
 
-function ProjectsPage(): JSX.Element {
+export default function ProjectsPage(): JSX.Element {
   return (
     <AnimatedLayout>
       <motion.div
@@ -102,4 +102,3 @@ function ProjectsPage(): JSX.Element {
     </AnimatedLayout>
   );
 }
-export default ProjectsPage;

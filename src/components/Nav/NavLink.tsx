@@ -13,7 +13,7 @@ function NavLink({ href, title }: NavLinkProps) {
       transition={{ duration: 0.2 }}
       whileTap={{ scale: 0.95 }}
     >
-      <a href={href} className=" text-white hover:text-black">
+      <a href={href} className=" text-white hover:text-black bold">
         {title}
       </a>
     </motion.li>

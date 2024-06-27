@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { motion, useAnimationControls } from "framer-motion";
-import { ButtonMenu } from "./ButtonMenu";
+import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
+import ButtonMenuLink from "./ButtonMenuLink";
 
 type NavAnimationVariants = {
   open: {
@@ -58,7 +58,7 @@ export function NavMenuButton(): JSX.Element {
     return () => {
       document.removeEventListener("mousedown", handleClickOutsideMenu);
     };
-  }, [isOpen]);
+  }, [isOpen, controls]);
 
   const handleHover = (e: MouseEvent) => {
     const target = e.target as HTMLButtonElement;
@@ -79,7 +79,7 @@ export function NavMenuButton(): JSX.Element {
   return (
     <div>
       <motion.button
-        className="nav-button inline-flex items-center justify-center text-2xl text-center rounded-full bg-rose-900 text-rose-300 sticky sticky-animation top-10 right-1 z-50 cursor-pointer w-10 h-10 p-2 border border-amber-300 transition-colors"
+        className="nav-button inline-flex items-center justify-center text-2xl text-center rounded-full bg-rose-900 text-rose-300 top-20 right-1 z-50 cursor-pointer w-10 h-10 p-2 border border-amber-300 transition-colors"
         onClick={handleOpen}
         onHoverStart={(e) => {
           handleHover(e);
@@ -93,7 +93,23 @@ export function NavMenuButton(): JSX.Element {
       >
         ▶
       </motion.button>
-      {isOpen ? <ButtonMenu /> : null}
+      <AnimatePresence mode="wait">
+        {isOpen && (
+          <motion.div
+            key="buttonMenu"
+            className="button-nav-menu flex absolute w-50vw h-50vh bg-black bg-opacity-50 top- z-49 flex-col justify-start place-items-start gap-4 p-4 rounded-r-xl"
+            initial={{ opacity: 0, x: "-100%", scale: 0.4 }}
+            animate={{ opacity: 1, x: "0%", scale: 1.0 }}
+            transition={{ duration: 0.5, type: "tween" }}
+            exit={{ opacity: 0, x: "-100%", scale: 0.4 }}
+          >
+            <ButtonMenuLink url="/" title="About" />
+            <ButtonMenuLink url="/contact" title="Contact" />
+            <ButtonMenuLink url="/projects" title="Projects" />
+            <ButtonMenuLink url="/resume" title="Resume" />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
