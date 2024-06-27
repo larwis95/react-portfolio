@@ -8,10 +8,10 @@ export default function App() {
   return (
     <>
       <Nav />
+      <Hero />
       <AnimatedLayout>
-        <Hero />
+        <AnimatedOutlet />
       </AnimatedLayout>
-      <AnimatedOutlet />
     </>
   );
 }
