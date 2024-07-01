@@ -68,7 +68,7 @@ export default function ProjectsPage(): JSX.Element {
   return (
     <AnimatedLayout>
       <motion.div
-        className="mt-16 flex justify-center items-center h-full gap-1 flex-wrap w-full p-4 flex-row"
+        className="mt-16 flex h-full w-full flex-row flex-wrap items-center justify-center gap-4 overflow-x-hidden overflow-y-hidden p-4"
         initial={{
           perspective: `1000px`,
           transformStyle: "preserve-3d",

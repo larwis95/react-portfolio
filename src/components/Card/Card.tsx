@@ -21,7 +21,7 @@ export default function Card({
 
   return (
     <motion.div
-      className="card  w-3/4 h-64 bg-rose-400 shadow-lg rounded-lg overflow-hidden relative cursor-pointer select-none flex flex-col justify-center items-center gap-4 p-4"
+      className="card relative flex h-64 w-full cursor-pointer select-none flex-col items-center justify-center gap-4 overflow-hidden rounded-lg bg-rose-400 p-4 shadow-lg lg:w-3/4"
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -42,7 +42,7 @@ export default function Card({
       transition={{ duration: 1.5, type: "tween" }}
     >
       <motion.div
-        className="overlay flex absolute top-full bottom-full left-0 right-0 rounded-lg bg-red-950 bg-opacity-90 w-full h-full z-20"
+        className="overlay absolute bottom-full left-0 right-0 top-full z-20 flex h-full w-full rounded-lg bg-red-950 bg-opacity-90"
         animate={{
           top: isHovered ? "0%" : "100%",
           bottom: isHovered ? "0%" : "100%",
@@ -50,17 +50,17 @@ export default function Card({
         }}
         transition={{ duration: 0.5 }}
       >
-        <p className="p-4 text-white stroke-black bold text-2xl absolute bottom-0 left-6">
+        <p className="bold absolute left-0 stroke-black p-4 text-2xl text-white sm:bottom-8 md:bottom-0">
           {cardDescription}
         </p>
         <IconBrandGithub
           size={64}
-          className="absolute bottom-0 right-6 cursor-pointer hover:stroke-rose-300 transition-colors"
+          className="absolute bottom-0 right-6 cursor-pointer transition-colors hover:stroke-rose-300"
           onClick={() => window.open(githubLink, "_blank")}
         />
       </motion.div>
       <div
-        className="absolute inset-0 z-1"
+        className="z-1 absolute inset-0"
         style={{
           backgroundImage: `url(${cardImage})`,
           backgroundSize: "cover",

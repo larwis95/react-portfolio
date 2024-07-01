@@ -11,7 +11,7 @@ export default function AnimatedLayout({ children }: Props) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ x: "-100%" }}
       transition={{ duration: 1.0, type: "tween" }}
-      className="w-full h-full"
+      className="flex h-full w-full flex-col items-center justify-center gap-4 overflow-x-hidden"
     >
       {children}
     </motion.div>
