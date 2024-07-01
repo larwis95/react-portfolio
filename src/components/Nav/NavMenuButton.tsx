@@ -36,7 +36,7 @@ export function NavMenuButton(): JSX.Element {
   const controls = useAnimationControls();
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const buttonRef = useRef(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const handleOpen = () => {
@@ -88,8 +88,8 @@ export function NavMenuButton(): JSX.Element {
       <motion.button
         ref={buttonRef}
         className={`${
-          isAnimating ? "pointer-events-none" : "pointer-events-auto"
-        } nav-button inline-flex  items-center justify-center text-2xl text-center rounded-full bg-rose-900 text-rose-300 top-20 right-1 z-50 cursor-pointer w-10 h-10 p-2 border border-amber-300 transition-colors duration-300 ease-in-out`}
+          isAnimating ? "pointer-events-none" : ""
+        } nav-button right-1 top-20 z-50 inline-flex h-10 w-10 cursor-pointer select-none items-center justify-center rounded-full border border-amber-300 bg-rose-900 p-2 text-center text-2xl text-rose-300 transition-colors duration-300 ease-in-out`}
         onClick={() => {
           isAnimating ? null : handleOpen();
         }}
@@ -113,7 +113,7 @@ export function NavMenuButton(): JSX.Element {
           <motion.div
             ref={menuRef}
             key="buttonMenu"
-            className="button-nav-menu flex absolute w-50vw h-50vh bg-black bg-opacity-50 top- z-49 flex-col justify-start place-items-start gap-4 p-4 rounded-r-xl"
+            className="button-nav-menu w-50vw h-50vh z-49 absolute flex flex-col place-items-start justify-start gap-4 rounded-r-xl bg-black bg-opacity-50 p-4"
             initial={{ opacity: 0, x: "-100%", scale: 0.4 }}
             animate={{ opacity: 1, x: "0%", scale: 1.0 }}
             transition={{ duration: 0.5, type: "tween" }}

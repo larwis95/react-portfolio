@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface NavLinkProps {
   href: string;
@@ -10,25 +11,26 @@ function NavLink({ href, title }: NavLinkProps) {
   const location = useLocation();
   return (
     <motion.li
-      className={`m-1 p-2 bg-black relative rounded-md cursor-pointer transition hover:bg-rose-300 hover:text-black basis-full ${
+      className={`relative m-1 flex cursor-pointer items-center justify-center rounded-md bg-black p-2 text-center transition hover:bg-rose-300 hover:text-black ${
         location.pathname === href
-          ? "border-b-2 border-rose-500 pb-2 pointer-events-none"
+          ? "pointer-events-none border-b-2 border-rose-500 pb-2"
           : ""
       }`}
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.2 }}
       whileTap={{ scale: 0.95 }}
+      style={{ height: "40px" }}
     >
-      <a
-        href={href}
+      <Link
+        to={href}
         className={`${
           location.pathname === href
-            ? "text-rose-500 pointer-events-none"
+            ? "pointer-events-none text-rose-500"
             : "text-white"
-        } hover:text-black bold relative w-full h-full transition`}
+        } bold relative h-full w-full transition hover:text-black`}
       >
         {title}
-      </a>
+      </Link>
     </motion.li>
   );
 }
