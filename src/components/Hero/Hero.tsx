@@ -22,18 +22,18 @@ export default function Hero(): JSX.Element {
   return (
     <div
       ref={ref}
-      className="w-full h-screen overflow-hidden relative grid place-items-center"
+      className="relative grid h-screen w-full place-items-center overflow-hidden overflow-x-hidden"
     >
       <motion.h1
         style={{
           y: textY,
         }}
-        className="font-bold text-white lg:text-9xl md:text-5xl sm:text-base xs:text-base relative z-10 text-center"
+        className="xs:text-base relative z-10 text-center font-bold text-white sm:text-base md:text-5xl lg:text-9xl"
       >
         Lawrence Wisniewski
       </motion.h1>
       <motion.div
-        className="absolute inset-0 z-1"
+        className="z-1 absolute inset-0"
         style={{
           backgroundImage: `url(${heroBG})`,
           backgroundSize: "cover",

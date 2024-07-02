@@ -6,6 +6,7 @@ import JSQuiz from "../assets/jsquiz.png";
 import Kanban from "../assets/kanban.png";
 import Weather from "../assets/weatherapp.png";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 type Project = {
   key: number;
@@ -65,10 +66,13 @@ function clickHandler(url: string): void {
 }
 
 export default function ProjectsPage(): JSX.Element {
+  useEffect(() => {
+    document.title = "Projects | Lawrence Wisniewski";
+  }, []);
   return (
     <AnimatedLayout>
       <motion.div
-        className="mt-16 flex h-full w-full flex-row flex-wrap items-center justify-center gap-4 overflow-x-hidden overflow-y-hidden p-4"
+        className="mt-24 flex h-full w-full flex-row flex-wrap items-center justify-center gap-4 overflow-hidden p-4"
         initial={{
           perspective: `1000px`,
           transformStyle: "preserve-3d",

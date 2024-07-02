@@ -38,6 +38,7 @@ body {
   place-items: center;
   min-width: fit-content;
   min-height: fit-content;
+  overflow-x: hidden;
 }
 
 h1 {
