@@ -22,7 +22,7 @@ export default function Hero(): JSX.Element {
   return (
     <div
       ref={ref}
-      className="relative grid h-screen w-full place-items-center overflow-hidden overflow-x-hidden"
+      className="relative grid h-screen w-full place-items-center overflow-hidden"
     >
       <motion.h1
         style={{
@@ -49,7 +49,7 @@ export default function Hero(): JSX.Element {
         }}
       />
       <motion.div
-        className="absolute inset-0 z-20"
+        className="absolute inset-0 z-20 overflow-hidden"
         style={{
           backgroundImage: `url(${heroFG})`,
           backgroundSize: "cover",

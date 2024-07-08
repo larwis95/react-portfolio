@@ -89,7 +89,7 @@ export function NavMenuButton(): JSX.Element {
         ref={buttonRef}
         className={`${
           isAnimating ? "pointer-events-none" : ""
-        } nav-button right-1 top-20 z-50 inline-flex h-10 w-10 cursor-pointer select-none items-center justify-center rounded-full border border-amber-300 bg-rose-900 p-2 text-center text-2xl text-rose-300 transition-colors duration-300 ease-in-out`}
+        } nav-button top-20 z-50 ml-3 inline-flex h-10 w-10 cursor-pointer select-none items-center justify-center rounded-full border border-amber-300 bg-rose-900 p-2 text-center text-2xl text-rose-300 transition-colors duration-300 ease-in-out`}
         onClick={() => {
           isAnimating ? null : handleOpen();
         }}
