@@ -14,12 +14,12 @@ export default function AboutTextSection({
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="m-5 p-4 flex justify-center items-center flex-col min-w-full"
+      className="m-5 flex min-w-full flex-col items-center justify-center p-4"
     >
-      <h2 className="text-4xl mb-1 text-secondary">{title}</h2>
+      <h2 className="text-secondary mb-1 text-4xl">{title}</h2>
       <div className="container flex flex-col">
         {description?.map((desc, index) => (
-          <p key={index} className="text-center text-white">
+          <p key={index} className="text-wrap text-center text-white">
             {desc}
           </p>
         ))}

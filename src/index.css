@@ -9,7 +9,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(#5f1203, #000000);
+  background: linear-gradient(in lch, #5f1203, #000000);
   background-repeat: no-repeat;
 
   font-synthesis: none;
@@ -52,6 +52,10 @@ header {
   align-items: center;
   flex-direction: col;
   z-index: 1000;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @layer utilities {

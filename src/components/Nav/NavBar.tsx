@@ -14,14 +14,14 @@ function NavBar(): JSX.Element {
       className={
         scroll
           ? `sticky-animation sticky top-28 z-50`
-          : "absolute-animation absolute left-1 top-10"
+          : "absolute-animation absolute top-10"
       }
       style={scroll ? { height: "0px" } : { height: "84px" }}
     >
       {scroll ? (
         <NavMenuButton />
       ) : (
-        <nav className="flex">
+        <nav className="ml-2 flex">
           <ul className="flex flex-row flex-wrap">
             <NavLink href="/" title="About" />
             <NavLink href="/contact" title="Contact" />

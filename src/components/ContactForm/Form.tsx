@@ -7,9 +7,10 @@ export default function Form(): JSX.Element {
   const [emailSuccess, setEmailSuccess] = useState<boolean | undefined>(
     undefined,
   );
+  const [validEmail, setValidEmail] = useState<boolean | undefined>(undefined);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const nameError = errorMessage.includes("Name");
-  const emailError = errorMessage.includes("Email");
+  const emailError = errorMessage.includes("Email field is required");
   const messageError = errorMessage.includes("Message");
 
   const validateForm = () => {
@@ -28,13 +29,27 @@ export default function Form(): JSX.Element {
     }
   };
 
-  const handleEmailUnfocus = (e: React.FocusEvent<HTMLInputElement>): void => {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(e.target.value)) {
-      setErrorMessage("Email is invalid");
+  const handleUnfocus = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ): void => {
+    const titleCase = (str: string) => {
+      return str.replace(/\b\w/g, (char) => char.toUpperCase());
+    };
+    if (!e.target.value) {
+      setErrorMessage(`${titleCase(e.target.id)} field is required.`);
       return;
     }
-    setErrorMessage("");
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(e.target.value)) {
+      setValidEmail(false);
+      setErrorMessage("Email is invalid");
+    }
+    if (emailPattern.test(e.target.value)) {
+      setValidEmail(true);
+    }
   };
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,7 +66,7 @@ export default function Form(): JSX.Element {
       setEmailSuccess(true);
     } catch (error: any) {
       setEmailSuccess(false);
-      setErrorMessage(error.message as string);
+      setErrorMessage(error.message);
       setTimeout(() => {
         setErrorMessage("");
       }, 5000);
@@ -75,10 +90,11 @@ export default function Form(): JSX.Element {
           type="text"
           placeholder="John Doe"
           className="rounded-md p-2"
+          onBlur={(e) => handleUnfocus(e)}
         />
         <p
-          className={`text-sm text-red-500 ${nameError ? "opacity-100" : "opacity-0"}`}
-          style={{ height: "14px", transition: "opacity 0.5s" }}
+          className={`border border-rose-600 bg-black p-1 text-sm text-red-600 ${nameError ? "opacity-100" : "opacity-0"}`}
+          style={{ height: "24px", width: "fit-content" }}
         >
           {errorMessage}
         </p>
@@ -89,11 +105,18 @@ export default function Form(): JSX.Element {
           type="email"
           placeholder="example@example.com"
           className="rounded-md p-2"
-          onBlur={(e) => handleEmailUnfocus(e)}
+          onBlur={(e) => handleUnfocus(e)}
+          onChange={(e) => handleEmailChange(e)}
         />
+        {validEmail === false && (
+          <p className="h-4 text-sm text-red-600">Email is invalid</p>
+        )}
+        {validEmail === true && (
+          <p className="h-4 text-sm text-green-500">Email is valid</p>
+        )}
         <p
-          className={`text-sm text-red-500 ${emailError ? "opacity-100" : "opacity-0"}`}
-          style={{ height: "14px", transition: "opacity 0.5s" }}
+          className={`border border-rose-600 bg-black p-1 text-sm text-red-600 ${emailError ? "opacity-100" : "opacity-0"}`}
+          style={{ height: "24px", width: "fit-content" }}
         >
           {errorMessage}
         </p>
@@ -103,10 +126,11 @@ export default function Form(): JSX.Element {
           name="message"
           placeholder="Your message here..."
           className="rounded-md p-2"
+          onBlur={(e) => handleUnfocus(e)}
         />
         <p
-          className={`text-sm text-red-500 ${messageError ? "opacity-100" : "opacity-0"}`}
-          style={{ height: "14px", transition: "opacity 0.5s" }}
+          className={`border border-rose-600 bg-black p-1 text-sm text-red-600 ${messageError ? "opacity-100" : "opacity-0"}`}
+          style={{ height: "24px", width: "fit-content" }}
         >
           {errorMessage}
         </p>
