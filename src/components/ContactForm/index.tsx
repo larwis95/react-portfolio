@@ -1,6 +1,8 @@
 import emailjs from "@emailjs/browser";
-import { useRef } from "react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+import Notification from "./Notification";
+import Input from "./Input";
 
 export default function Form(): JSX.Element {
   const form = useRef() as React.MutableRefObject<HTMLFormElement>;
@@ -8,10 +10,22 @@ export default function Form(): JSX.Element {
     undefined,
   );
   const [validEmail, setValidEmail] = useState<boolean | undefined>(undefined);
+  const [validMessage, setValidMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const nameError = errorMessage.includes("Name");
-  const emailError = errorMessage.includes("Email field is required");
-  const messageError = errorMessage.includes("Message");
+  const [showNotification, setShowNotification] = useState<boolean>(false);
+
+  useEffect(() => {
+    let timeout: number;
+    if (errorMessage !== "Email is invalid" || validEmail) {
+      timeout = setTimeout(() => {
+        setShowNotification(false);
+        setValidEmail(undefined);
+      }, 2000);
+    }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [errorMessage, validEmail]);
 
   const validateForm = () => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -37,6 +51,7 @@ export default function Form(): JSX.Element {
     };
     if (!e.target.value) {
       setErrorMessage(`${titleCase(e.target.id)} field is required.`);
+      setShowNotification(true);
       return;
     }
   };
@@ -44,17 +59,23 @@ export default function Form(): JSX.Element {
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailPattern.test(e.target.value)) {
+      setShowNotification(true);
       setValidEmail(false);
+      setValidMessage("");
       setErrorMessage("Email is invalid");
-    }
-    if (emailPattern.test(e.target.value)) {
+    } else {
       setValidEmail(true);
+      setValidMessage("Email is valid");
+      setErrorMessage("");
+      setShowNotification(true);
     }
   };
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setErrorMessage("");
+      setValidEmail(undefined);
       validateForm();
       await emailjs.sendForm(
         "portfolio_contact",
@@ -67,81 +88,73 @@ export default function Form(): JSX.Element {
     } catch (error: any) {
       setEmailSuccess(false);
       setErrorMessage(error.message);
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 5000);
+      setValidEmail(false);
+      setShowNotification(true);
+      return;
     }
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center rounded-lg border-2 border-rose-600 bg-slate-700 bg-opacity-50 p-5 md:w-3/4 lg:w-1/2">
+    <div className="relative flex w-full flex-col items-center justify-center rounded-lg border-2 border-rose-600 bg-slate-700 bg-opacity-50 p-5 md:w-3/4 lg:w-1/2">
       <h1 className="mb-6 text-center text-3xl font-bold">Contact Me</h1>
       <form
-        className="relative flex w-full flex-col gap-4 sm:w-full md:w-full lg:w-1/2"
+        className="flex w-full flex-col items-center justify-center gap-8 sm:w-full md:w-full lg:w-1/2"
         onSubmit={(e) => {
           sendEmail(e);
         }}
         ref={form}
       >
-        <label htmlFor="name">Name:</label>
-        <input
+        <Input
           id="name"
-          name="user_name"
+          label="Name:"
           type="text"
-          placeholder="John Doe"
-          className="rounded-md p-2"
+          name="user_name"
           onBlur={(e) => handleUnfocus(e)}
+          placeholder="Your Name"
+          emailSuccess={emailSuccess}
         />
-        <p
-          className={`border border-rose-600 bg-black p-1 text-sm text-red-600 ${nameError ? "opacity-100" : "opacity-0"}`}
-          style={{ height: "24px", width: "fit-content" }}
-        >
-          {errorMessage}
-        </p>
-        <label htmlFor="email">Email:</label>
-        <input
+        <Input
           id="email"
-          name="user_email"
+          label="Email:"
           type="email"
-          placeholder="example@example.com"
-          className="rounded-md p-2"
-          onBlur={(e) => handleUnfocus(e)}
+          name="user_email"
           onChange={(e) => handleEmailChange(e)}
-        />
-        {validEmail === false && (
-          <p className="h-4 text-sm text-red-600">Email is invalid</p>
-        )}
-        {validEmail === true && (
-          <p className="h-4 text-sm text-green-500">Email is valid</p>
-        )}
-        <p
-          className={`border border-rose-600 bg-black p-1 text-sm text-red-600 ${emailError ? "opacity-100" : "opacity-0"}`}
-          style={{ height: "24px", width: "fit-content" }}
-        >
-          {errorMessage}
-        </p>
-        <label htmlFor="message">Message:</label>
-        <textarea
-          id="message"
-          name="message"
-          placeholder="Your message here..."
-          className="rounded-md p-2"
           onBlur={(e) => handleUnfocus(e)}
+          placeholder="Your Email"
+          emailSuccess={emailSuccess}
         />
-        <p
-          className={`border border-rose-600 bg-black p-1 text-sm text-red-600 ${messageError ? "opacity-100" : "opacity-0"}`}
-          style={{ height: "24px", width: "fit-content" }}
-        >
-          {errorMessage}
-        </p>
+        <Input
+          id="message"
+          label="Message:"
+          type="textarea"
+          name="message"
+          onBlur={(e) => handleUnfocus(e)}
+          placeholder="Your Message"
+          emailSuccess={emailSuccess}
+        />
         <input
           type="submit"
-          className={`${emailSuccess ? "pointer-events-none cursor-not-allowed bg-slate-600" : ""} cursor-pointer rounded-md bg-rose-500 p-2 font-bold text-white`}
+          className={`${emailSuccess ? "pointer-events-none cursor-not-allowed bg-slate-600" : ""} cursor-pointer rounded-md border border-white bg-rose-500 p-2 font-bold text-white transition duration-300 ease-in-out hover:scale-105 hover:border-rose-500 hover:bg-black hover:text-rose-500`}
           value={`${emailSuccess ? "Email Sent" : "Send Email"}`}
         />
       </form>
+      <div className="absolute bottom-0 right-0 flex h-full items-end justify-center overflow-y-hidden p-1 sm:w-5 lg:w-fit">
+        <AnimatePresence>
+          {showNotification && (
+            <>
+              {errorMessage && (
+                <Notification message={errorMessage} type="error" />
+              )}
+              {validEmail && (
+                <Notification message={validMessage} type="success" />
+              )}
+            </>
+          )}
+        </AnimatePresence>
+      </div>
+
       {emailSuccess && (
-        <p className="text-sm text-green-500">Email sent successfully!</p>
+        <Notification message="Email sent successfully" type="success" />
       )}
     </div>
   );

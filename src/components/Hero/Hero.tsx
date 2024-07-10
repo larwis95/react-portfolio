@@ -28,7 +28,7 @@ export default function Hero(): JSX.Element {
         style={{
           y: textY,
         }}
-        className="xs:text-base relative z-10 text-center font-bold text-white sm:text-base md:text-5xl lg:text-9xl"
+        className="xs:text-base relative z-10 text-center font-bold text-white sm:text-5xl md:text-5xl lg:text-9xl"
       >
         Lawrence Wisniewski
       </motion.h1>

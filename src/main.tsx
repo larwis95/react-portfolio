@@ -3,17 +3,18 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
 import "./index.css";
-import NotFoundPage from "./pages/NotFoundPage.tsx";
+import NotFoundPage from "./pages/Error/index.tsx";
 
-const AboutPage = lazy(() => import("./pages/AboutPage.tsx"));
-const ProjectsPage = lazy(() => import("./pages/ProjectsPage.tsx"));
-const ContactPage = lazy(() => import("./pages/ContactPage.tsx"));
-const ResumePage = lazy(() => import("./pages/ResumePage.tsx"));
+const AboutPage = lazy(() => import("./pages/About"));
+const ProjectsPage = lazy(() => import("./pages/Project"));
+const ContactPage = lazy(() => import("./pages/Contact"));
+const ResumePage = lazy(() => import("./pages/Resume"));
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         index: true,
@@ -30,10 +31,6 @@ const router = createBrowserRouter([
       {
         path: "/resume",
         element: <ResumePage />,
-      },
-      {
-        path: "*",
-        element: <NotFoundPage />,
       },
     ],
   },

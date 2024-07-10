@@ -1,9 +1,13 @@
 import { motion } from "framer-motion";
-import AnimatedCharacter from "../components/AnimatedCharacter";
-import AnimatedLayout from "../utils/page-transitions/AnimatedLayout";
+import { useEffect } from "react";
+import AnimatedCharacter from "../../components/AnimatedCharacter";
+import AnimatedLayout from "../../utils/page-transitions/AnimatedLayout";
 
 export default function LoadingPage({}) {
   const loadingText = "Loading...";
+  useEffect(() => {
+    document.title = "Loading...";
+  }, []);
   return (
     <AnimatedLayout>
       <div className="flex h-full w-full flex-col items-center justify-center gap-4">
