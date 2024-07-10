@@ -27,7 +27,7 @@ function NavLink({ href, title }: NavLinkProps) {
           location.pathname === href
             ? "pointer-events-none text-rose-500"
             : "text-white"
-        } bold relative h-full w-full transition hover:text-black`}
+        } bold h-full w-full transition hover:text-black`}
       >
         {title}
       </Link>

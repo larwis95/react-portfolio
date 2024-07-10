@@ -1,11 +1,11 @@
-import About from "../components/About";
-import AnimatedLayout from "../utils/page-transitions/AnimatedLayout";
+import About from "../../components/About";
+import AnimatedLayout from "../../utils/page-transitions/AnimatedLayout";
 import { useEffect } from "react";
 
 export default function HomePage(): JSX.Element {
   useEffect(() => {
     document.title = "About | Lawrence Wisniewski";
-  });
+  }, []);
   return (
     <AnimatedLayout>
       <title>About - Lawrence Wisniewski</title>

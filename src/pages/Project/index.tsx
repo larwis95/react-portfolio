@@ -1,10 +1,11 @@
-import Card from "../components/Card/Card";
-import AnimatedLayout from "../utils/page-transitions/AnimatedLayout";
-import Habit from "../assets/httyh.png";
-import BestEats from "../assets/besteats.png";
-import JSQuiz from "../assets/jsquiz.png";
-import Kanban from "../assets/kanban.png";
-import Weather from "../assets/weatherapp.png";
+import Project from "../../components/Card/Project";
+import AnimatedLayout from "../../utils/page-transitions/AnimatedLayout";
+import Habit from "../../assets/httyh.png";
+import BestEats from "../../assets/besteats.png";
+import JSQuiz from "../../assets/jsquiz.png";
+import Kanban from "../../assets/kanban.png";
+import Weather from "../../assets/weatherapp.png";
+import TextEditor from "../../assets/jate-PWA.png";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 
@@ -59,6 +60,15 @@ const projects: Project[] = [
     url: "https://larwis95.github.io/city-weather-search/",
     githubLink: "https://github.com/larwis95/city-weather-search",
   },
+  {
+    key: 6,
+    title: "Just Another Text Editor",
+    description:
+      "Simple text editor with syntax highlighting, progressive web app.",
+    image: TextEditor,
+    url: "https://just-another-text-editor-pwa.onrender.com/",
+    githubLink: "https://github.com/larwis95/just-another-text-editor-PWA",
+  },
 ];
 
 function clickHandler(url: string): void {
@@ -87,7 +97,7 @@ export default function ProjectsPage(): JSX.Element {
       >
         {projects.map((project) => {
           return (
-            <Card
+            <Project
               key={project.key}
               githubLink={project.githubLink}
               position={project.key}

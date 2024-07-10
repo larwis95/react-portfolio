@@ -1,8 +1,7 @@
 import AnimatedOutlet from "./utils/page-transitions/AnimatedOutlet";
-import Nav from "./components/Nav";
-import Hero from "./components/Hero/Hero";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
-import LoadingPage from "./pages/LoadingPage";
+import Loading from "./pages/Loading";
 import "./App.css";
 import AnimatedLayout from "./utils/page-transitions/AnimatedLayout";
 import { Suspense } from "react";
@@ -10,10 +9,9 @@ import { Suspense } from "react";
 export default function App() {
   return (
     <>
-      <Nav />
+      <Header />
       <AnimatedLayout>
-        <Hero />
-        <Suspense fallback={<LoadingPage />}>
+        <Suspense fallback={<Loading />}>
           <AnimatedOutlet />
         </Suspense>
       </AnimatedLayout>

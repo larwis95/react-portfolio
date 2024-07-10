@@ -11,7 +11,7 @@ interface CardProps {
   githubLink: string;
 }
 
-export default function Card({
+export default function Project({
   githubLink,
   cardDescription,
   cardImage,

@@ -11,6 +11,7 @@ export default function FooterIconLinks(): JSX.Element {
         href="https://twitter.com/larwis95"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Twitter"
       >
         <IconBrandTwitter
           size={24}
@@ -22,6 +23,7 @@ export default function FooterIconLinks(): JSX.Element {
         href="https://www.linkedin.com/in/larry-wisniewski-1b54a7317/"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="LinkedIn"
       >
         <IconBrandLinkedin
           size={24}
@@ -33,6 +35,7 @@ export default function FooterIconLinks(): JSX.Element {
         href="https://github.com/larwis95"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="GitHub"
       >
         <IconBrandGithub
           size={24}

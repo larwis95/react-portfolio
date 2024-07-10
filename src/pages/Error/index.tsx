@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function NotFoundPage() {
+  useEffect(() => {
+    document.title = "404 - Not Found";
+  }, []);
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
+    <div className="flex h-screen w-screen flex-col items-center justify-center">
       <h1 className="text-4xl">404</h1>
       <p className="text-xl">
         Oops! Something went wrong, click the link below to go back home!
