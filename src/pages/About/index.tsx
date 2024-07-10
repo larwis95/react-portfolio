@@ -3,6 +3,7 @@ import AnimatedLayout from "../../utils/page-transitions/AnimatedLayout";
 import { useEffect } from "react";
 
 export default function HomePage(): JSX.Element {
+  // have this useEffect on every page, it sets the document title to the current page we are on.
   useEffect(() => {
     document.title = "About | Lawrence Wisniewski";
   }, []);

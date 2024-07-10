@@ -17,6 +17,7 @@ export default function Project({
   cardImage,
   onClick,
 }: CardProps): JSX.Element {
+  // need to use a state to track the hover state of the card, so we can animate an overlay
   const [isHovered, setIsHovered] = useState(false);
 
   return (

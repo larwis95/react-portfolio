@@ -5,15 +5,22 @@ import Notification from "./Notification";
 import Input from "./Input";
 
 export default function Form(): JSX.Element {
+  // need a reference to the form
   const form = useRef() as React.MutableRefObject<HTMLFormElement>;
+  // need state to handle the success or failure of the form submission
   const [emailSuccess, setEmailSuccess] = useState<boolean | undefined>(
     undefined,
   );
+  // need state to handle the validation of the email field
   const [validEmail, setValidEmail] = useState<boolean | undefined>(undefined);
+  // need state to handle the message to display when the email is valid
   const [validMessage, setValidMessage] = useState<string>("");
+  // need state to handle the error message
   const [errorMessage, setErrorMessage] = useState<string>("");
+  // need state to handle the notification
   const [showNotification, setShowNotification] = useState<boolean>(false);
 
+  // a useEffect to handle the hiding of the notifications
   useEffect(() => {
     let timeout: number;
     if (errorMessage !== "Email is invalid" || validEmail) {
@@ -27,6 +34,7 @@ export default function Form(): JSX.Element {
     };
   }, [errorMessage, validEmail]);
 
+  // a function that checks all the fields in the form and throws an error if any of them are empty or invalid
   const validateForm = () => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!form.current.user_name.value) {
@@ -43,6 +51,7 @@ export default function Form(): JSX.Element {
     }
   };
 
+  // a function that handles the unfocus event on the input fields, and shows an error message if the field is empty
   const handleUnfocus = (
     e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
@@ -56,6 +65,7 @@ export default function Form(): JSX.Element {
     }
   };
 
+  // a function that handles the change event on the email field, and shows an error message if the email is invalid
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailPattern.test(e.target.value)) {
@@ -71,6 +81,7 @@ export default function Form(): JSX.Element {
     }
   };
 
+  // the submit function for the form, sends the email using the emailjs library
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {

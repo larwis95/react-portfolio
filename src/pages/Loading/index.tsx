@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import AnimatedCharacter from "../../components/AnimatedCharacter";
 import AnimatedLayout from "../../utils/page-transitions/AnimatedLayout";
 
+// loading page component
 export default function LoadingPage({}) {
   const loadingText = "Loading...";
   useEffect(() => {

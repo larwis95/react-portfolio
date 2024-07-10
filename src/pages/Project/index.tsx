@@ -18,6 +18,7 @@ type Project = {
   githubLink: string;
 };
 
+// array of projects we pass to the Project component
 const projects: Project[] = [
   {
     key: 1,

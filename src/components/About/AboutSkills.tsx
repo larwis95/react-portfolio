@@ -4,12 +4,14 @@ interface SkillsProps {
   skills: JSX.Element[];
 }
 
+// Export AboutSkills component
 export default function AboutSkills({ skills }: SkillsProps): JSX.Element {
+  // Duplicate the skills array to create a scrolling effect
   const duplicatedSkills = [...skills, ...skills];
   return (
     <motion.div
       className={
-        "flex xs:w-2/3 lg:w-1/4 justify-center items-center overflow-x-hidden p-4 border-4 border-white rounded-lg bg-black bg-opacity-50"
+        "xs:w-2/3 flex items-center justify-center overflow-x-hidden rounded-lg border-4 border-white bg-black bg-opacity-50 p-4 lg:w-1/4"
       }
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -33,7 +35,7 @@ export default function AboutSkills({ skills }: SkillsProps): JSX.Element {
               className="flex-shrink-0"
               style={{ width: `${100 / skills.length}%` }}
             >
-              <div className="flex items-center justify-center h-full">
+              <div className="flex h-full items-center justify-center">
                 {skill}
               </div>
             </div>

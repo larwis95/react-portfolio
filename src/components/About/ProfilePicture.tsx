@@ -7,6 +7,7 @@ export default function ProfilePicture({
   src,
 }: ProfilePictureProps): JSX.Element {
   return (
+    // Profile picture with motion animation for the border-radius
     <motion.div
       className="h-32 w-32 border border-white"
       initial={{ borderRadius: "50% 0% 50% 0%" }}

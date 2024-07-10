@@ -5,6 +5,7 @@ interface CharacterProps {
   delay?: number;
 }
 
+// an animated character component, takes a character and a delay, and animates the character by changing the opacity from 0 to 1 and back looping
 export default function AnimatedCharacter({
   character,
   delay,

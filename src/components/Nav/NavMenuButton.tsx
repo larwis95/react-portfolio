@@ -33,18 +33,24 @@ const variants: NavAnimationVariants = {
 };
 
 export function NavMenuButton(): JSX.Element {
+  // useAnimationControls is a hook from framer-motion that allows us to control animations
   const controls = useAnimationControls();
+  // need to introduce state to handle the open and close of the menu
   const [isOpen, setIsOpen] = useState(false);
+  // need to introduce state to check if the button is animating
   const [isAnimating, setIsAnimating] = useState(false);
+  // need refs for the button and the menu
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // function to handle the open and close of the menu
   const handleOpen = () => {
     setIsOpen(!isOpen);
     setIsAnimating(true);
     controls.start(isOpen ? "closed" : "open");
   };
 
+  // function  that closes the menu when clicking outside of the menu
   const handleClickOutsideMenu = (e: MouseEvent) => {
     if (
       e.target !== menuRef?.current &&
@@ -60,6 +66,7 @@ export function NavMenuButton(): JSX.Element {
     }
   };
 
+  // useEffect to add an event listener to the document to handle the click outside of the menu
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutsideMenu);
     return () => {
@@ -67,6 +74,7 @@ export function NavMenuButton(): JSX.Element {
     };
   }, [isOpen, controls]);
 
+  // function to handle the hover effect of the button
   const handleHover = (e: MouseEvent) => {
     const target = e.target as HTMLButtonElement;
     if (target) {
@@ -75,6 +83,7 @@ export function NavMenuButton(): JSX.Element {
     }
   };
 
+  // function to handle the end of the hover effect of the button
   const handleHoverEnd = (e: MouseEvent) => {
     const target = e.target as HTMLButtonElement;
     if (target) {

@@ -7,10 +7,13 @@ interface NavLinkProps {
   title: string;
 }
 
+// NavLink component
 function NavLink({ href, title }: NavLinkProps) {
+  // gets the current url location
   const location = useLocation();
   return (
     <motion.li
+      // need the location to set the current nav link to a different color
       className={`relative m-1 flex cursor-pointer items-center justify-center rounded-md bg-black p-2 text-center transition hover:bg-rose-300 hover:text-black ${
         location.pathname === href
           ? "pointer-events-none border-b-2 border-rose-500 pb-2"
@@ -35,4 +38,5 @@ function NavLink({ href, title }: NavLinkProps) {
   );
 }
 
+// export NavLink component
 export default NavLink;

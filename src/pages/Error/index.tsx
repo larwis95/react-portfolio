@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
+// error page
 export default function NotFoundPage() {
   useEffect(() => {
     document.title = "404 - Not Found";

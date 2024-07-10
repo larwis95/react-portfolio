@@ -10,6 +10,7 @@ import {
 import ProfilePicture from "./ProfilePicture";
 import LW_IMG from "../../assets/larry_w.jpg";
 
+// Skills Icons from the Tabler Icons Library
 const skills = [
   <IconBrandTypescript size={48} />,
   <IconBrandJavascript size={48} />,
@@ -18,6 +19,7 @@ const skills = [
   <IconBrandNodejs size={48} />,
 ];
 
+// About Component
 export default function About(): JSX.Element {
   return (
     <div className="relative flex w-full flex-col items-center gap-2">
