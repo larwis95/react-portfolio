@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import "./index.css";
 import NotFoundPage from "./pages/Error/index.tsx";
 
+// Lazy load the pages so that they are only loaded when needed.
 const AboutPage = lazy(() => import("./pages/About"));
 const ProjectsPage = lazy(() => import("./pages/Project"));
 const ContactPage = lazy(() => import("./pages/Contact"));

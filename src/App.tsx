@@ -11,6 +11,7 @@ export default function App() {
     <>
       <Header />
       <AnimatedLayout>
+        {/* Suspense is used to show a loading spinner while the page is loading since we are lazy loading each page.*/}
         <Suspense fallback={<Loading />}>
           <AnimatedOutlet />
         </Suspense>
