@@ -4,6 +4,7 @@ interface NotificationProps {
   type: string;
 }
 
+// Component that displays error/success messages for the form
 export default function Notification({ message, type }: NotificationProps) {
   return type === "success" ? (
     <motion.div

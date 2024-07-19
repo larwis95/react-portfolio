@@ -122,7 +122,7 @@ export function NavMenuButton(): JSX.Element {
           <motion.div
             ref={menuRef}
             key="buttonMenu"
-            className="button-nav-menu w-50vw h-50vh z-49 absolute flex flex-col place-items-start justify-start gap-4 rounded-r-xl bg-black bg-opacity-50 p-4"
+            className="button-nav-menu w-50svw h-50vh z-49 absolute flex flex-col place-items-start justify-start gap-4 rounded-r-xl bg-black bg-opacity-50 p-4"
             initial={{ opacity: 0, x: "-100%", scale: 0.4 }}
             animate={{ opacity: 1, x: "0%", scale: 1.0 }}
             transition={{ duration: 0.5, type: "tween" }}
